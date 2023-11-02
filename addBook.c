@@ -64,8 +64,8 @@ if(t == head){
     free(t);
 }
 }
-/*-----------------------------------      FindBookByKey    ----------------------------------*/
-book findBookByKey(book*head,int key){
+/*-----------------------------------      FindBookByKey    -----------------------------*/
+book findBookByKey(book head,int key){
 book t = head;
 book p = NULL;
 
@@ -75,31 +75,41 @@ if(t->next != NULL && t->key != key){
 }
 if(t == NULL){
 
-    return;
+    return NULL;
     
 }
 if(t == head){
 
-    head = head->next;
+    head = head -> next;
 
 }else{
 
-    p->next = t->next;
-
+    // p->next = t->next;
+    return t;
 }
 
 
 }
+/*-----------------------------------      ExportBookByKey    -----------------------------*/
+void exportBookByKey(book head,int key){
 
+if(head == NULL){
+    return;
+}
+else
+{
+ findBookByKey(head,key);
 
+if(nbcopy > 1){
+    nbcopy = nbcopy - 1;
+}else{
+deleteBookByKey(head,key);
 
+}
 
+}
 
-
-
-
-
-
+}
 
 
 
@@ -138,7 +148,6 @@ if(t == head){
 
 
 int main(){
-    
     
     
     
