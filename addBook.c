@@ -26,15 +26,15 @@ return newNode;
 
 /*-----------------------------------  AddBookEnd    --------------------------------------*/
 
-void addBookEnd(book head,int key,const char*title,const char*author,int nbcopy){
+void addBookEnd(book*head,int key,const char*title,const char*author,int nbcopy){
     book newnode = createNode(key,title,author,nbcopy);
 
-if(head == NULL){
-    head = newnode;
+if(*head == NULL){
+    *head = newnode;
 }
 else
 {
-    book t = head;
+    book t = *head;
     while (t->next != NULL)
     {
             t = t->next;
@@ -65,8 +65,8 @@ if(t == head){
 }
 }
 /*-----------------------------------      FindBookByKey    -----------------------------*/
-book findBookByKey(book head,int key){
-book t = head;
+book findBookByKey(book*head,int key){
+book t =  *head;
 // book p = NULL;
 
 if(t->next != NULL && t->key != key){
@@ -78,9 +78,9 @@ if(t == NULL){
     return NULL;
     
 }
-if(t == head){
+if(t != *head){
 
-    head = head -> next;
+     *head = *head->next;
 
 }else{
 
@@ -98,9 +98,9 @@ if(head == NULL){
 }
 else
 {
-book g = findBookByKey(head,key);
+book g = findBookByKey(&head,key);
 
-if(nbcopy > 1){
+if(g->nbcopy > 1){
     g->nbcopy = g->nbcopy - 1;
 }else{
 deleteBookByKey(head,key);
@@ -123,7 +123,7 @@ book g = findBookByKey(head,key);
 if(nbcopy > 1){
     g->nbcopy = g->nbcopy + 1;
 }else{
-book m = addBookEnd(book head,key,title,author,nbcopy);
+book m = addBookEnd(&head,key,title,author,nbcopy);
 }
 }
 
@@ -158,9 +158,19 @@ book m = addBookEnd(book head,key,title,author,nbcopy);
 
 
 int main(){
+    book head = NULL;
+   addBookEnd(&head,1,"aaaaaaa","sssssss",55); 
+   addBookEnd(&head,2,"bbbbbbb","ttttttt",51); 
+   addBookEnd(&head,3,"ccccccc","uuuuuuu",52); 
+   addBookEnd(&head,4,"ddddddd","vvvvvvv",54); 
+   addBookEnd(&head,5,"eeeeeee","wwwwwww",53); 
+   addBookEnd(&head,6,"fffffff","xxxxxxx",56); 
+   addBookEnd(&head,7,"ggggggg","yyyyyyy",57); 
+   addBookEnd(&head,8,"hhhhhhh","zzzzzzz",58); 
+
+book f = findBookByKey(&head,7);
     
-    
-    
+    printf("%d",f->nbcopy);
     
     return 0;
 }
