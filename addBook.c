@@ -67,10 +67,10 @@ if(t == head){
 /*-----------------------------------      FindBookByKey    -----------------------------*/
 book findBookByKey(book head,int key){
 book t = head;
-book p = NULL;
+// book p = NULL;
 
 if(t->next != NULL && t->key != key){
-    p = t;
+    // p = t;
     t = t->next; 
 }
 if(t == NULL){
@@ -98,27 +98,37 @@ if(head == NULL){
 }
 else
 {
- findBookByKey(head,key);
+book g = findBookByKey(head,key);
 
 if(nbcopy > 1){
-    nbcopy = nbcopy - 1;
+    g->nbcopy = g->nbcopy - 1;
 }else{
 deleteBookByKey(head,key);
 
 }
+}
+}
+/*-----------------------------------      ReturntBookByKey    -----------------------------*/
+void returnBookByKey(book head,int key,const char*title,const char*author,int nbcopy){
 
+book newnode = createNode(key,title,author,nbcopy);
+
+if(head == NULL){
+    head = newnode;
+}               
+else
+{
+book g = findBookByKey(head,key);
+
+if(nbcopy > 1){
+    g->nbcopy = g->nbcopy + 1;
+}else{
+book m = addBookEnd(book head,key,title,author,nbcopy);
+}
 }
 
+
 }
-
-
-
-
-
-
-
-
-
 
 
 
